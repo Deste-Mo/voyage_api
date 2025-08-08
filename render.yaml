@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: travel-booking-api
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: npm install
+    startCommand: node src/server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PGHOST
+        fromDatabase: travel-booking-db
+        property: host
+      - key: PGPORT
+        value: 5432
+      - key: PGUSER
+        fromDatabase: travel-booking-db
+        property: user
+      - key: PGPASSWORD
+        fromDatabase: travel-booking-db
+        property: password
+      - key: PGDATABASE
+        fromDatabase: travel-booking-db
+        property: database
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_FROM_NUMBER
+        sync: false
+databases:
+  - name: travel-booking-db
+    plan: free
+    region: oregon
