@@ -40,3 +40,14 @@ node src/server.js
 ## OTP
 - En dev: la réponse de `/register` inclut `devOtp`.
 - En prod: configurez `TWILIO_*` dans `.env`.
+
+## Déploiement sur Railway
+
+- Start Command: `node src/server.js`
+- Variables d’environnement recommandées:
+  - `JWT_SECRET`: définissez une valeur secrète
+  - `DATABASE_URL`: collez l’URL PostgreSQL Railway (ou liez la base et laissez Railway injecter la variable)
+  - Optionnel Twilio: `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER`
+- Ne définissez pas `PORT` (Railway le fournit automatiquement)
+- Les tables sont créées automatiquement au démarrage via `src/db/migrate.js`
+- Santé: `GET /health` renvoie `{ ok: true }`
